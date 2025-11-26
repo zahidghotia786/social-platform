@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConnectHub - Social Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,14 +14,24 @@
 
         :root {
             --primary: #6366f1;
+            --primary-light: #818cf8;
             --secondary: #ec4899;
             --accent: #8b5cf6;
             --dark: #1e1b4b;
+            --dark-light: #312e81;
             --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
             --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
         body {
@@ -29,6 +40,7 @@
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            color: var(--dark);
         }
 
         /* Animated Background */
@@ -163,7 +175,7 @@
         .search-bar input {
             width: 100%;
             padding: 0.8rem 3rem 0.8rem 1.5rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--gray-light);
             border-radius: 50px;
             font-size: 1rem;
             transition: all 0.3s;
@@ -181,7 +193,7 @@
             right: 1.5rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #94a3b8;
+            color: var(--gray);
         }
 
         .header-actions {
@@ -215,7 +227,7 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #ef4444;
+            background: var(--danger);
             color: white;
             border-radius: 50%;
             width: 20px;
@@ -272,7 +284,7 @@
             backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 1.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             height: fit-content;
             position: sticky;
             top: 100px;
@@ -294,7 +306,7 @@
             text-align: center;
             margin-bottom: 1.5rem;
             padding-bottom: 1.5rem;
-            border-bottom: 2px solid #f1f5f9;
+            border-bottom: 2px solid var(--gray-light);
         }
 
         .sidebar-avatar {
@@ -332,7 +344,7 @@
         }
 
         .sidebar-username {
-            color: #64748b;
+            color: var(--gray);
             font-size: 0.9rem;
         }
 
@@ -356,7 +368,7 @@
 
         .stat-label {
             font-size: 0.8rem;
-            color: #94a3b8;
+            color: var(--gray);
         }
 
         .sidebar-menu {
@@ -372,10 +384,10 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            color: #475569;
+            color: var(--gray);
         }
 
-        .menu-item:hover {
+        .menu-item:hover, .menu-item.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             transform: translateX(10px);
@@ -401,6 +413,99 @@
             }
         }
 
+        /* Stories */
+        .stories-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            animation: scaleIn 0.5s ease;
+        }
+
+        .stories-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stories-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .stories-scroll {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .story:hover {
+            transform: scale(1.05);
+        }
+
+        .story-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            padding: 3px;
+            background: var(--gradient-2);
+            margin-bottom: 0.5rem;
+        }
+
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .story-name {
+            font-size: 0.8rem;
+            color: var(--dark);
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .add-story {
+            position: relative;
+        }
+
+        .add-story-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-story-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
         /* Create Post */
         .create-post {
             background: rgba(255, 255, 255, 0.95);
@@ -408,7 +513,7 @@
             border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             animation: scaleIn 0.5s ease;
         }
 
@@ -439,7 +544,7 @@
         .create-post-input {
             flex: 1;
             padding: 1rem 1.5rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--gray-light);
             border-radius: 50px;
             font-size: 1rem;
             transition: all 0.3s;
@@ -457,7 +562,7 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 1rem;
-            border-top: 2px solid #f1f5f9;
+            border-top: 2px solid var(--gray-light);
         }
 
         .post-action-btns {
@@ -475,8 +580,8 @@
             gap: 0.5rem;
             font-size: 0.9rem;
             transition: all 0.3s;
-            background: #f1f5f9;
-            color: #475569;
+            background: var(--gray-light);
+            color: var(--gray);
         }
 
         .action-btn:hover {
@@ -508,7 +613,7 @@
             border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s;
             animation: slideUp 0.6s ease forwards;
             opacity: 0;
@@ -531,7 +636,7 @@
 
         .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .post-header {
@@ -561,7 +666,7 @@
         }
 
         .post-time {
-            color: #94a3b8;
+            color: var(--gray);
             font-size: 0.85rem;
         }
 
@@ -569,7 +674,7 @@
             cursor: pointer;
             padding: 0.5rem;
             font-size: 1.5rem;
-            color: #94a3b8;
+            color: var(--gray);
             transition: all 0.3s;
         }
 
@@ -580,7 +685,7 @@
 
         .post-content {
             margin-bottom: 1rem;
-            color: #334155;
+            color: var(--dark);
             line-height: 1.6;
         }
 
@@ -600,10 +705,10 @@
             display: flex;
             justify-content: space-between;
             padding: 1rem 0;
-            border-top: 2px solid #f1f5f9;
-            border-bottom: 2px solid #f1f5f9;
+            border-top: 2px solid var(--gray-light);
+            border-bottom: 2px solid var(--gray-light);
             margin-bottom: 1rem;
-            color: #64748b;
+            color: var(--gray);
             font-size: 0.9rem;
         }
 
@@ -620,25 +725,28 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #64748b;
+            color: var(--gray);
             font-size: 1rem;
             border-radius: 10px;
             transition: all 0.3s;
         }
 
         .post-action:hover {
-            background: #f1f5f9;
+            background: var(--gray-light);
             color: var(--primary);
             transform: scale(1.05);
         }
 
         .post-action.liked {
-            color: #ef4444;
+            color: var(--danger);
         }
 
         /* Right Sidebar */
         .right-sidebar {
             animation: slideLeft 0.6s ease;
+            position: sticky;
+            top: -500px;
+            height: max-content;
         }
 
         @keyframes slideLeft {
@@ -658,7 +766,7 @@
             border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
         }
 
         .widget-title {
@@ -671,12 +779,63 @@
             gap: 0.5rem;
         }
 
+        .widget-title i {
+            color: var(--primary);
+        }
+
+        /* Birthday Widget */
+        .birthday-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .birthday-item:last-child {
+            border-bottom: none;
+        }
+
+        .birthday-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .birthday-info h5 {
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .birthday-info p {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .wish-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wish-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Suggestions */
         .suggestion-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 0;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--gray-light);
         }
 
         .suggestion-item:last-child {
@@ -702,7 +861,7 @@
         }
 
         .suggestion-info p {
-            color: #94a3b8;
+            color: var(--gray);
             font-size: 0.8rem;
         }
 
@@ -725,19 +884,19 @@
         /* Trending */
         .trending-item {
             padding: 1rem 0;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--gray-light);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .trending-item:hover {
-            background: #f8fafc;
+            background: var(--light);
             padding-left: 10px;
             border-radius: 10px;
         }
 
         .trending-category {
-            color: #94a3b8;
+            color: var(--gray);
             font-size: 0.8rem;
         }
 
@@ -748,8 +907,75 @@
         }
 
         .trending-count {
-            color: #94a3b8;
+            color: var(--gray);
             font-size: 0.85rem;
+        }
+
+        /* Events */
+        .event-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .event-item:hover {
+            background: var(--light);
+            padding-left: 10px;
+            border-radius: 10px;
+        }
+
+        .event-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-title {
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .event-location {
+            color: var(--gray);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
         }
 
         /* Responsive */
@@ -771,6 +997,15 @@
             .main-container {
                 padding: 0 1rem;
             }
+            
+            .post-action-btns {
+                flex-wrap: wrap;
+            }
+            
+            .action-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
         }
 
         /* Floating Action Button */
@@ -790,6 +1025,9 @@
             transition: all 0.3s;
             z-index: 1000;
             animation: float-fab 3s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @keyframes float-fab {
@@ -800,6 +1038,26 @@
         .fab:hover {
             transform: scale(1.1);
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
         }
     </style>
 </head>
@@ -814,28 +1072,28 @@
     <header class="header">
         <div class="header-container">
             <div class="logo">
-                <div class="logo-icon">🚀</div>
+                <div class="logo-icon"><i class="fas fa-rocket"></i></div>
                 ConnectHub
             </div>
             
             <div class="search-bar">
                 <input type="text" placeholder="Search for people, posts, or topics...">
-                <span class="search-icon">🔍</span>
+                <span class="search-icon"><i class="fas fa-search"></i></span>
             </div>
             
             <div class="header-actions">
                 <button class="icon-btn">
-                    🏠
+                    <i class="fas fa-home"></i>
                 </button>
                 <button class="icon-btn">
-                    💬
+                    <i class="fas fa-comment-alt"></i>
                     <span class="badge">5</span>
                 </button>
                 <button class="icon-btn">
-                    🔔
+                    <i class="fas fa-bell"></i>
                     <span class="badge">12</span>
                 </button>
-                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" alt="Profile" class="profile-pic">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQFyuboBbDJhOA/profile-displayphoto-scale_200_200/B4DZqj0tDYHwAY-/0/1763685095744?e=2147483647&v=beta&t=vMiZj7w1URV52qPxCzEIET4JI2crk22yFTZRbnk3DD0" alt="Profile" class="profile-pic">
             </div>
         </div>
     </header>
@@ -846,10 +1104,10 @@
         <aside class="sidebar">
             <div class="sidebar-profile">
                 <div class="sidebar-avatar">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" alt="User">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQFyuboBbDJhOA/profile-displayphoto-scale_200_200/B4DZqj0tDYHwAY-/0/1763685095744?e=2147483647&v=beta&t=vMiZj7w1URV52qPxCzEIET4JI2crk22yFTZRbnk3DD0" alt="User">
                 </div>
-                <div class="sidebar-name">John Doe</div>
-                <div class="sidebar-username">@johndoe</div>
+                <div class="sidebar-name">Zahid Ghotia</div>
+                <div class="sidebar-username">@zahidghotia</div>
                 <div class="sidebar-stats">
                     <div class="stat">
                         <div class="stat-value">1.2K</div>
@@ -867,28 +1125,28 @@
             </div>
             
             <ul class="sidebar-menu">
-                <li class="menu-item">
-                    <span class="menu-icon">📰</span>
+                <li class="menu-item active">
+                    <span class="menu-icon"><i class="fas fa-newspaper"></i></span>
                     News Feed
                 </li>
                 <li class="menu-item">
-                    <span class="menu-icon">👥</span>
+                    <span class="menu-icon"><i class="fas fa-user-friends"></i></span>
                     Friends
                 </li>
                 <li class="menu-item">
-                    <span class="menu-icon">💼</span>
+                    <span class="menu-icon"><i class="fas fa-briefcase"></i></span>
                     Jobs
                 </li>
                 <li class="menu-item">
-                    <span class="menu-icon">🎮</span>
+                    <span class="menu-icon"><i class="fas fa-gamepad"></i></span>
                     Gaming
                 </li>
                 <li class="menu-item">
-                    <span class="menu-icon">📱</span>
+                    <span class="menu-icon"><i class="fas fa-users"></i></span>
                     Groups
                 </li>
                 <li class="menu-item">
-                    <span class="menu-icon">⚙️</span>
+                    <span class="menu-icon"><i class="fas fa-cog"></i></span>
                     Settings
                 </li>
             </ul>
@@ -896,17 +1154,65 @@
 
         <!-- Feed -->
         <main class="feed">
+            <!-- Stories -->
+            <div class="stories-container">
+                <div class="stories-header">
+                    <div class="stories-title">Stories</div>
+                    <div class="stories-actions">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="stories-scroll">
+                    <div class="story add-story">
+                        <div class="add-story-btn">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="story-name">Add Story</div>
+                    </div>
+                    <div class="story">
+                        <div class="story-avatar">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="User">
+                        </div>
+                        <div class="story-name">Sarah</div>
+                    </div>
+                    <div class="story">
+                        <div class="story-avatar">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="User">
+                        </div>
+                        <div class="story-name">Mike</div>
+                    </div>
+                    <div class="story">
+                        <div class="story-avatar">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="User">
+                        </div>
+                        <div class="story-name">Emma</div>
+                    </div>
+                    <div class="story">
+                        <div class="story-avatar">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="User">
+                        </div>
+                        <div class="story-name">Alex</div>
+                    </div>
+                    <div class="story">
+                        <div class="story-avatar">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="User">
+                        </div>
+                        <div class="story-name">Sophia</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Create Post -->
             <div class="create-post">
                 <div class="create-post-header">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop" alt="User" class="create-post-avatar">
-                    <input type="text" class="create-post-input" placeholder="What's on your mind, John?">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQFyuboBbDJhOA/profile-displayphoto-scale_200_200/B4DZqj0tDYHwAY-/0/1763685095744?e=2147483647&v=beta&t=vMiZj7w1URV52qPxCzEIET4JI2crk22yFTZRbnk3DD0" alt="User" class="create-post-avatar">
+                    <input type="text" class="create-post-input" placeholder="What's on your mind, Zahid?">
                 </div>
                 <div class="create-post-actions">
                     <div class="post-action-btns">
-                        <button class="action-btn">📷 Photo</button>
-                        <button class="action-btn">🎥 Video</button>
-                        <button class="action-btn">😊 Feeling</button>
+                        <button class="action-btn"><i class="fas fa-image"></i> Photo</button>
+                        <button class="action-btn"><i class="fas fa-video"></i> Video</button>
+                        <button class="action-btn"><i class="fas fa-smile"></i> Feeling</button>
                     </div>
                     <button class="post-btn">Post</button>
                 </div>
@@ -922,21 +1228,21 @@
                             <span class="post-time">2 hours ago</span>
                         </div>
                     </div>
-                    <div class="post-menu">⋯</div>
+                    <div class="post-menu"><i class="fas fa-ellipsis-h"></i></div>
                 </div>
                 <div class="post-content">
                     Just finished an amazing sunset photoshoot! 🌅 The colors were absolutely breathtaking. Can't wait to share more from this series. What do you think?
                 </div>
                 <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop" alt="Post" class="post-image">
                 <div class="post-stats">
-                    <span>❤️ 234 Likes</span>
-                    <span>45 Comments</span>
-                    <span>12 Shares</span>
+                    <span><i class="fas fa-heart"></i> 234 Likes</span>
+                    <span><i class="fas fa-comment"></i> 45 Comments</span>
+                    <span><i class="fas fa-share"></i> 12 Shares</span>
                 </div>
                 <div class="post-actions">
-                    <button class="post-action">❤️ Like</button>
-                    <button class="post-action">💬 Comment</button>
-                    <button class="post-action">↗️ Share</button>
+                    <button class="post-action"><i class="fas fa-heart"></i> Like</button>
+                    <button class="post-action"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="post-action"><i class="fas fa-share"></i> Share</button>
                 </div>
             </div>
 
@@ -950,18 +1256,235 @@
                             <span class="post-time">5 hours ago</span>
                         </div>
                     </div>
-                    <div class="post-menu">⋯</div>
+                    <div class="post-menu"><i class="fas fa-ellipsis-h"></i></div>
                 </div>
                 <div class="post-content">
                     Excited to announce that I've joined the team at TechCorp as a Senior Developer! 🎉 Looking forward to this new adventure and building amazing products. Thanks everyone for the support! 💼✨
                 </div>
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop" alt="Post" class="post-image">
                 <div class="post-stats">
-                    <span>❤️ 412 Likes</span>
-                    <span>89 Comments</span>
-                    <span>23 Shares</span>
+                    <span><i class="fas fa-heart"></i> 412 Likes</span>
+                    <span><i class="fas fa-comment"></i> 89 Comments</span>
+                    <span><i class="fas fa-share"></i> 23 Shares</span>
                 </div>
                 <div class="post-actions">
-                    <button class="post-action liked">❤️ Like</button>
-                    <button class="post-action">💬 Comment</button>
-                    <button class="post-action">↗️ Share</button
+                    <button class="post-action liked"><i class="fas fa-heart"></i> Like</button>
+                    <button class="post-action"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="post-action"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="User" class="post-avatar">
+                        <div class="post-user-info">
+                            <h4>Emma Wilson</h4>
+                            <span class="post-time">1 day ago</span>
+                        </div>
+                    </div>
+                    <div class="post-menu"><i class="fas fa-ellipsis-h"></i></div>
+                </div>
+                <div class="post-content">
+                    Just launched my new online course about digital marketing strategies! 🚀 It's been a year in the making, and I'm so excited to share everything I've learned. The first 50 signups get 50% off! Use code: LAUNCH50
+                </div>
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=500&fit=crop" alt="Post" class="post-image">
+                <div class="post-stats">
+                    <span><i class="fas fa-heart"></i> 567 Likes</span>
+                    <span><i class="fas fa-comment"></i> 124 Comments</span>
+                    <span><i class="fas fa-share"></i> 45 Shares</span>
+                </div>
+                <div class="post-actions">
+                    <button class="post-action"><i class="fas fa-heart"></i> Like</button>
+                    <button class="post-action"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="post-action"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Birthday Widget -->
+            <div class="widget">
+                <div class="widget-title">
+                    <i class="fas fa-birthday-cake"></i>
+                    Birthdays Today
+                </div>
+                <div class="birthday-item">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="User" class="birthday-avatar">
+                    <div class="birthday-info">
+                        <h5>Sophia Martinez</h5>
+                        <p>It's her birthday today!</p>
+                    </div>
+                    <button class="wish-btn">Wish</button>
+                </div>
+                <div class="birthday-item">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="User" class="birthday-avatar">
+                    <div class="birthday-info">
+                        <h5>Alex Thompson</h5>
+                        <p>Celebrating today!</p>
+                    </div>
+                    <button class="wish-btn">Wish</button>
+                </div>
+            </div>
+
+            <!-- Suggestions Widget -->
+            <div class="widget">
+                <div class="widget-title">
+                    <i class="fas fa-user-plus"></i>
+                    People You May Know
+                </div>
+                <div class="suggestion-item">
+                    <div class="suggestion-user">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="User" class="suggestion-avatar">
+                        <div class="suggestion-info">
+                            <h5>David Lee</h5>
+                            <p>12 mutual friends</p>
+                        </div>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <div class="suggestion-item">
+                    <div class="suggestion-user">
+                        <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop" alt="User" class="suggestion-avatar">
+                        <div class="suggestion-info">
+                            <h5>Jennifer Kim</h5>
+                            <p>8 mutual friends</p>
+                        </div>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <div class="suggestion-item">
+                    <div class="suggestion-user">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop" alt="User" class="suggestion-avatar">
+                        <div class="suggestion-info">
+                            <h5>Chris Evans</h5>
+                            <p>5 mutual friends</p>
+                        </div>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+            </div>
+
+            <!-- Trending Widget -->
+            <div class="widget">
+                <div class="widget-title">
+                    <i class="fas fa-fire"></i>
+                    Trending Now
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Technology</div>
+                    <div class="trending-title">New AI Breakthrough</div>
+                    <div class="trending-count">12.5K posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Sports</div>
+                    <div class="trending-title">Championship Finals</div>
+                    <div class="trending-count">8.7K posts</div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-category">Entertainment</div>
+                    <div class="trending-title">Movie Release Date</div>
+                    <div class="trending-count">15.2K posts</div>
+                </div>
+            </div>
+
+            <!-- Events Widget -->
+            <div class="widget">
+                <div class="widget-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    Upcoming Events
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <i class="fas fa-calendar-day"></i>
+                        Tomorrow, 7:00 PM
+                    </div>
+                    <div class="event-title">Tech Meetup: Future of Web</div>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Downtown Conference Center
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <i class="fas fa-calendar-day"></i>
+                        Saturday, 2:00 PM
+                    </div>
+                    <div class="event-title">Community Charity Run</div>
+                    <div class="event-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Central Park
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Help</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+            <a href="#" class="footer-link">Careers</a>
+        </div>
+        <div class="footer-copyright">
+            © 2023 ConnectHub. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <button class="fab">
+        <i class="fas fa-edit"></i>
+    </button>
+
+    <script>
+        // Simple interactivity for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Like button functionality
+            const likeButtons = document.querySelectorAll('.post-action');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('liked')) {
+                        this.classList.remove('liked');
+                        this.innerHTML = '<i class="fas fa-heart"></i> Like';
+                    } else {
+                        this.classList.add('liked');
+                        this.innerHTML = '<i class="fas fa-heart"></i> Liked';
+                    }
+                });
+            });
+
+            // Menu item active state
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Story click
+            const stories = document.querySelectorAll('.story');
+            stories.forEach(story => {
+                story.addEventListener('click', function() {
+                    if (!this.classList.contains('add-story')) {
+                        alert('Viewing story...');
+                    } else {
+                        alert('Create a new story!');
+                    }
+                });
+            });
+
+            // FAB click
+            const fab = document.querySelector('.fab');
+            fab.addEventListener('click', function() {
+                document.querySelector('.create-post-input').focus();
+            });
+        });
+    </script>
+</body>
+</html>
